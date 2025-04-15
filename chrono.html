@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrono</title>
+
+
+    <style>
+        @font-face {
+            font-family: "pixeBoy";
+            src: url("assets/Pixeboy.ttf") format("truetype");
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: pixeBoy;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .star-container {
+            display: flex;
+            align-items: center;
+            width: 150px;
+            height: 150px;
+            top: 115px;
+            left: 75px;
+        }
+
+        .star {
+            width: 100%;
+        }
+
+        .purple-moon-container {
+            max-width: 300px;
+        }
+
+        .chrono-type {
+            color: #6425e4;
+            font-size: 2.4rem;
+            position: absolute;
+            left: 20%;
+        }
+
+        .purple-moon {
+            width: 100%;
+        }
+
+        .timer {
+            font-size: 5.2rem;
+            color: #ffffff;
+            position: absolute;
+            top: 62px;
+            left: 65px;
+            transition: opacity 1s ease;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .timerStopAnimation {
+            animation: blink 1500ms ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-star-moon relative">
+        <div class="star-container relative">
+
+            <img src="./star2.png" alt="star" class="star">
+            <p class="chrono-type">Pause</p>
+        </div>
+
+        <div class="purple-moon-container relative">
+            <img src="./purple-moon2.png" alt="purple moon" class="purple-moon">
+            <p class="timer">00:00</p>
+        </div>
+    </div>
+    <button id="play">Play</button>
+    <button id="pause">Pause</button>
+    <button id="reset">Reset</button>
+
+</body>
+
+<script>
+
+    let timeLeft = 0;
+
+    const buttonPlay = document.getElementById("play");
+    const buttonPause = document.getElementById("pause");
+    const buttonReset = document.getElementById("reset");
+    const chronoType = document.querySelector(".chrono-type");
+    const timer = document.querySelector(".timer");
+
+    function workType() {
+        chronoType.textContent = "Work";
+        chronoType.style.left = "40px";
+    }
+
+    function pauseType() {
+        chronoType.textContent = "Pause";
+        chronoType.style.left = "20%";
+    }
+
+
+    function updateTimer() {
+        let seconds = timeLeft % 60;
+        let minutes = Math.floor(timeLeft / 60);
+
+        timer.innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+        if (timeLeft > 0) {
+            timeLeft--;
+        } else {
+            timer.classList.add("timerStopAnimation");
+        }
+
+    }
+
+    function stopTimer() {
+
+    }
+
+    // Button play
+
+    buttonPlay.addEventListener("click", () => {
+        const saisie = window.prompt();
+        const parts = saisie.split(" "); // récupère les mots dans la saisie
+
+        timer.classList.remove("timerStopAnimation");
+
+        if (parts.length >= 2) {
+            const command = parts[0]; // !travail || !pause
+            const duration = parts[1]; // 10m ou 30s
+
+            let minutes = 0;
+            let seconds = 0;
+
+
+            if (duration.endsWith("m")) {
+                minutes = parseInt(duration);
+
+            } else if (duration.endsWith("s")) {
+                seconds = parseInt(duration);
+
+            }
+
+            timeLeft = minutes * 60 + seconds;
+        }
+
+        if (saisie.startsWith("!travail")) {
+            workType();
+        }
+
+        if (saisie.startsWith("!pause")) {
+            pauseType();
+        }
+
+        let interval = setInterval(updateTimer, 1000)
+    })
+
+
+
+    buttonPause.addEventListener("click", () => {
+        const saisie = window.prompt();
+        const parts = saisie.split(" ");
+
+        if (saisie.startsWith("!stop")) {
+            stopTimer()
+        }
+    })
+
+    function resetTimer() {
+
+    }
+
+
+</script>
+
+</html>
