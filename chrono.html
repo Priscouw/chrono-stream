@@ -138,6 +138,12 @@
 
     }
 
+
+    function restartTimer() {
+
+    }
+
+
     // Button play
 
     buttonPlay.addEventListener("click", () => {
@@ -179,20 +185,14 @@
 
 
     buttonPause.addEventListener("click", () => {
-        const saisie = window.prompt();
-        const parts = saisie.split(" ");
-
-        if (saisie.startsWith("!stop")) {
-            stopTimer()
-        }
+        stopTimer();
     })
 
+    buttonRestart.addEventListener("click", () => {
+        restartTimer();
 
+    })
 
-
-    function restartTimer() {
-
-    }
 
 
 </script>
