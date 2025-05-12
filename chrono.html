@@ -157,12 +157,11 @@
     function stopChrono() {
         clearInterval(intervalId);
         isRunning = false;
-        timer.classList.add("timerStopAnimation");
-        console.log("coucou");
+
     }
 
     function restartChrono() {
-        if (!isRunning && timerLeft > 0) {
+        if (!isRunning && timeLeft > 0) {
             startTimer();
         }
     }
@@ -170,6 +169,10 @@
 
     client.on('message', (channel, tags, message, self) => {
         if (self || !message.startsWith('!')) return;
+
+        if (`${tags['display-name']}` !== "Priscouw") {
+            return;
+        }
 
         const parts = message.split(" ");    // récupère les mots dans la saisie
         const command = parts[0]; // !travail || !pause
