@@ -95,7 +95,7 @@
 
         <div class="purple-moon-container relative">
             <img src="./purple-moon2.png" alt="purple moon" class="purple-moon">
-            <p class="timer timerStopAnimation">00:00</p>
+            <p class="timer">00:00</p>
         </div>
     </div>
 
@@ -112,6 +112,7 @@
 
     let timeLeft = 0;
     let intervalId = null;
+    let isRunning = false;
 
 
     const chronoType = document.querySelector(".chrono-type");
@@ -148,14 +149,22 @@
     }
 
     function startTimer() {
+        clearInterval(intervalId);
+        isRunning = true;
         intervalId = setInterval(updateTimer, 1000)
     }
 
     function stopChrono() {
-        intervalId = clearInterval(intervalId);
+        clearInterval(intervalId);
+        isRunning = false;
+        timer.classList.add("timerStopAnimation");
+        console.log("coucou");
     }
 
     function restartChrono() {
+        if (!isRunning && timerLeft > 0) {
+            startTimer();
+        }
     }
 
 
@@ -165,7 +174,7 @@
         const parts = message.split(" ");    // récupère les mots dans la saisie
         const command = parts[0]; // !travail || !pause
 
-        command === "!travail" ? workType() : null;
+        command === "!work" ? workType() : null;
         command === "!pause" ? pauseType() : null;
         command === "!stop" ? stopChrono() : null;
         command === "!restart" ? restartChrono() : null;
