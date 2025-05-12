@@ -118,15 +118,17 @@
     const timer = document.querySelector(".timer");
 
     function workType() {
+        intervalId = clearInterval(intervalId)
         chronoType.textContent = "Work";
         chronoType.style.left = "40px";
-        startTimer()
+        startTimer();
     }
 
     function pauseType() {
+        intervalId = clearInterval(intervalId)
         chronoType.textContent = "Pause";
         chronoType.style.left = "20%";
-        startTimer()
+        startTimer();
     }
 
 
@@ -147,7 +149,10 @@
         intervalId = setInterval(updateTimer, 1000)
     }
 
-    // Button play!  
+    function stopChrono() {
+        intervalId = clearInterval(intervalId);
+    }
+
 
     client.on('message', (channel, tags, message, self) => {
         if (self || !message.startsWith('!')) return;
@@ -155,8 +160,9 @@
         const parts = message.split(" ");    // récupère les mots dans la saisie
         const command = parts[0]; // !travail || !pause
 
-        command === "travail" ? workType() : null;
+        command === "!travail" ? workType() : null;
         command === "!pause" ? pauseType() : null;
+        command === "!stop" ? stopChrono() : null;
 
 
         timer.classList.remove("timerStopAnimation");
@@ -179,9 +185,6 @@
             timeLeft = minutes * 60 + seconds;
         }
 
-        if (command === "!stop") {
-            intervalId = clearInterval(intervalId)
-        }
 
     });
 </script>
