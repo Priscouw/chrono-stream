@@ -95,7 +95,7 @@
 
         <div class="purple-moon-container relative">
             <img src="./purple-moon2.png" alt="purple moon" class="purple-moon">
-            <p class="timer">00:00</p>
+            <p class="timer timerStopAnimation">00:00</p>
         </div>
     </div>
 
@@ -137,6 +137,8 @@
         let minutes = Math.floor(timeLeft / 60);
 
         timer.innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+        timer.classList.remove("timerStopAnimation")
 
         if (timeLeft > 0) {
             timeLeft--;
