@@ -174,7 +174,7 @@
             return;
         }
 
-        const parts = message.split(" ");    // récupère les mots dans la saisie
+        const parts = message.split(" ");    // découpe la chaine de caractère à chaque espace
         const command = parts[0]; // !travail || !pause
 
         command === "!work" ? workType() : null;
