@@ -174,8 +174,8 @@
             return;
         }
 
-        const parts = message.split(" ");    // découpe la chaine de caractère à chaque espace
-        const command = parts[0]; // !travail || !pause
+        const parts = message.split(" ");    // break the string at each space
+        const command = parts[0]; // ex : !work || !pause
 
         command === "!work" ? workType() : null;
         command === "!pause" ? pauseType() : null;
@@ -186,7 +186,7 @@
         timer.classList.remove("timerStopAnimation");
 
         if (parts.length >= 2) {
-            const duration = parts[1]; // 10m ou 30s
+            const duration = parts[1]; // ex : 10m ou 30s
 
             let minutes = 0;
             let seconds = 0;
