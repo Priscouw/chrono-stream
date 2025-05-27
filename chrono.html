@@ -104,7 +104,7 @@
 <script>
 
     const client = new tmi.Client({
-        channels: ['priscouw']
+        channels: ['yourName']
     });
 
     client.connect();
@@ -170,7 +170,7 @@
     client.on('message', (channel, tags, message, self) => {
         if (self || !message.startsWith('!')) return;
 
-        if (`${tags['display-name']}` !== "Priscouw") {
+        if (`${tags['display-name']}` !== "yourName") {
             return;
         }
 
