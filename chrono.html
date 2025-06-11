@@ -145,6 +145,8 @@
             timeLeft--;
         } else {
             timer.classList.add("timerStopAnimation");
+            chronoType.textContent = "Done";
+            chronoType.style.left = "40px";
         }
     }
 
@@ -176,17 +178,18 @@
 
         const parts = message.split(" ");    // break the string at each space
         const command = parts[0]; // ex : !work || !pause
+        const duration = parts[1]; // ex : 10m ou 30s
 
-        command === "!work" ? workType() : null;
-        command === "!pause" ? pauseType() : null;
+        command === "!work" && duration ? workType() : null;
+        command === "!pause" && duration ? pauseType() : null;
         command === "!stop" ? stopChrono() : null;
         command === "!restart" ? restartChrono() : null;
 
 
         timer.classList.remove("timerStopAnimation");
 
+
         if (parts.length >= 2) {
-            const duration = parts[1]; // ex : 10m ou 30s
 
             let minutes = 0;
             let seconds = 0;
