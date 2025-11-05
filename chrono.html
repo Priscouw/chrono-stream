@@ -143,10 +143,18 @@
 
         if (timeLeft > 0) {
             timeLeft--;
-        } else {
+        }
+
+        else {
             timer.classList.add("timerStopAnimation");
             chronoType.textContent = "Done";
             chronoType.style.left = "40px";
+
+            // Play sound when timer reaches zero
+            let audio = new Audio('yoursound.mp3');
+            audio.play();
+            clearInterval(intervalId);
+            audio.volume = 0.4; // Régle le volume entre 0.0 (muet) et 1.0 (max)
         }
     }
 
