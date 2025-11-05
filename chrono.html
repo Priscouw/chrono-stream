@@ -193,6 +193,10 @@
         command === "!stop" ? stopChrono() : null;
         command === "!restart" ? restartChrono() : null;
 
+        if (command !== "!work" && command !== "!pause" && command !== "!stop" && command !== "!restart") {
+            return;
+        }
+
 
         timer.classList.remove("timerStopAnimation");
 
